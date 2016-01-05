@@ -1,7 +1,8 @@
 require 'sinatra'
 require 'sinatra/activerecord'
+# require 'sinatra/flash'
 require './models.rb'
-require 'sinatra/flash'
+
 enable :sessions
 
 set :database, "sqlite3:groupblog.sqlite3"
@@ -9,8 +10,6 @@ set :database, "sqlite3:groupblog.sqlite3"
 def current_user
   if session[:user_id]
     @current_user = User.find(session[:user_id])
-  else
-  	@current_user = nil
   end
 end
 
@@ -35,7 +34,7 @@ get '/signin' do
 end
 
 get '/post' do
-	@current_user = current_user
+	@main_user = current_user
 	erb :post
 end
 
@@ -44,15 +43,23 @@ post '/signin' do
 	@user = User.where(username: params[:username]).first
 	# Check to see if the password is the same as the parameter of the user and the session cookie is empty
 	if @user.password == params[:password]
-		current_user
+		session[:user_id] = @user.id
     	# flash[:notice] = "You've been signed in successfully."
     	# current_user
-    	puts 'params are for current_user ' + current_user.inspect
+    	puts 'params are for current_user ' + @user.id.inspect 
     	redirect '/post'
 	else
 		flash[:notice] = "You cannot sign in my friend"
 		redirect '/'
 	end
+end
+
+get '/logout' do
+  @main_user = session[:user_id]
+  if @main_user
+	 session[:user_id] = 'nil'
+	redirect '/'
+  end
 end
 
 
