@@ -46,10 +46,10 @@ post '/signin' do
 	end
 end
 
-#Client will be redirected towards a new post page
-get '/post/:user_id.username/new' do
+# #Client will be redirected towards a new post page
+# get '/post/:user_id.username/new' do
 
-end
+# end
 
 # post '/post' do
 # 	current_user
