@@ -8,11 +8,18 @@ set :database, "sqlite3:groupblog.sqlite3"
 
 # This route is used for the sign-in and sign-up
 get '/' do 
-	redirect '/signin'
+
+	erb :index
 end
 
-get '/signin' do 
-	erb :index
+get '/signup' do
+	erb :signup
+end
+
+post '/signup' do 
+	@user = User.create(username: params[username], password: params[password], first: params[first], last: params[last],  email: params[email])
+	session[:user_id] = @user.id
+	redirect '/'
 end
 
 
