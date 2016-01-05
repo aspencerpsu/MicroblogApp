@@ -1,0 +1,7 @@
+<h1>Welcome <%= @current_user.username %>!</h1>
+<h2>Tell us about yourself for the day</h2>
+
+<form action = "/post/:user_id/new" method = "POST">
+	<textarea type = "text" placeholder = "Tell us how your day was" name = "body"></textarea>
+	<input type = "submit">
+</form>
