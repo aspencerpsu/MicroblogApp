@@ -16,13 +16,22 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.3)
     builder (3.2.2)
+    ffi (1.9.10)
     i18n (0.7.0)
     json (1.8.3)
+    listen (3.0.5)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
     minitest (5.8.3)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
     rake (10.4.2)
+    rb-fsevent (0.9.7)
+    rb-inotify (0.9.5)
+      ffi (>= 0.5.0)
+    rerun (0.11.0)
+      listen (~> 3.0)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -42,6 +51,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   rake
+  rerun
   sinatra-activerecord
   sqlite3
 
