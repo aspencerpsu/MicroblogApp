@@ -11,6 +11,7 @@ def current_user
     @current_user = User.find(session[:user_id])
   else
   	@current_user = nil
+  end
 end
 
 # This route is used for the sign-in and sign-up
@@ -24,7 +25,7 @@ end
 
 post '/signup' do 
 	params.inspect
-	@user = User.create(username: params[username], password: params[password], first: params[first], last: params[last],  email: params[email])
+	@user = User.create(username: params[:username], password: params[:password], first: params[:first], last: params[:last],  email: params[:email])
 	session[:user_id] = @user.id
 	redirect '/'
 end
@@ -40,6 +41,7 @@ post '/signin' do
     	puts 'params are for current_user ' + current_user.inspect
     	erb :post_sign
 	else
+		flash[:notice] = "You cannot sign in my friend"
 		redirect '/'
 	end
 end
@@ -49,8 +51,8 @@ get '/post/:user_id.username/new' do
 
 end
 
-post '/post' do
-	current_user
-	@post = Post.create(: params[username], password: params[password])
+# post '/post' do
+# 	current_user
+# 	@post = Post.create(: params[username], password: params[password])
 
 
