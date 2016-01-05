@@ -23,6 +23,3 @@ post '/signup' do
 end
 
 
-# This will be used for the sign-in and sign-up
-# post '/' do	
-# end
