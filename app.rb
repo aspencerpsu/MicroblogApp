@@ -41,6 +41,7 @@ post '/signin' do
     	puts 'params are for current_user ' + current_user.inspect
     	erb :post_sign
 	else
+		flash[:notice] = "You cannot sign in my friend"
 		redirect '/'
 	end
 end
