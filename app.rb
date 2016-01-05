@@ -7,7 +7,7 @@ enable :sessions
 set :database, "sqlite3:groupblog.sqlite3"
 
 def current_user
-  if session[:user_id].has_value?
+  if session[:user_id]
     @current_user = User.find(session[:user_id])
   else
   	@current_user = nil
@@ -30,6 +30,15 @@ post '/signup' do
 	redirect '/'
 end
 
+get '/signin' do
+	erb :signin
+end
+
+get '/post' do
+	@current_user = current_user
+	erb :post
+end
+
 post '/signin' do
 	# Select the first user in the Users table (i.e. row 1)
 	@user = User.where(username: params[:username]).first
@@ -39,12 +48,13 @@ post '/signin' do
     	# flash[:notice] = "You've been signed in successfully."
     	# current_user
     	puts 'params are for current_user ' + current_user.inspect
-    	erb :post_sign
+    	redirect '/post'
 	else
 		flash[:notice] = "You cannot sign in my friend"
 		redirect '/'
 	end
 end
+
 
 # #Client will be redirected towards a new post page
 # get '/post/:user_id.username/new' do
