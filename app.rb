@@ -34,8 +34,12 @@ get '/signin' do
 end
 
 get '/post' do
-	@main_user = current_user
-	erb :post
+	@user= current_user
+	if @user
+		erb :post
+	else
+		redirect '/'
+	end
 end
 
 post '/signin' do
@@ -55,11 +59,8 @@ post '/signin' do
 end
 
 get '/logout' do
-  @main_user = session[:user_id]
-  if @main_user
-	 session[:user_id] = 'nil'
+	session.clear
 	redirect '/'
-  end
 end
 
 
