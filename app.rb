@@ -54,6 +54,3 @@ post '/post' do
 	@post = Post.create(: params[username], password: params[password])
 
 
-# This will be used for the sign-in and sign-up
-# post '/' do	
-# end
