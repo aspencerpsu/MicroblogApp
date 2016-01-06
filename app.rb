@@ -39,26 +39,25 @@ get '/signin' do
 	erb :signin
 end
 
-get '/post/:user_id' do 
-	@user= current_user
+get '/post' do 
+	@user = current_user
 	if @user
-		my_params = "#{params[user_id: @user_id.id}"
 		erb :post
 	else
 		redirect '/'
 	end
 end
 
-post '/post/:user_id/new' do 
-	@current_user = current_user
-	if @current_user
-		my_params = "#{params[user_id: @user_id.id]}"
-		@post = Post.create(user_id: "#{@current_user.id}, post: params[:userbody], params[:title]")
-	else
-		@cantsign = "Can't post your food for thought, try again buddy"
-	end
-	erb :post
-end
+# post '/post/:user_id/new' do 
+# 	@current_user = current_user
+# 	if @current_user
+# 		puts @current_user.username
+# 		# @post = Post.create(user_id: "#{@current_user.id}, post: params[:userbody], params[:title]")
+# 	else
+# 		@cantsign = "Can't post your food for thought, try again buddy"
+# 	end
+# 	erb :post
+# end
 
 
 post '/signin' do
@@ -70,7 +69,7 @@ post '/signin' do
     	# flash[:notice] = "You've been signed in successfully."
     	# current_user
     	puts 'params are for current_user ' + @user.id.inspect 
-    	redirect '/post/:user_id'
+    	redirect '/post'
 	else
 		redirect '/'
 	end
@@ -80,6 +79,16 @@ get '/logout' do
 	session.clear
 	redirect '/'
 end
+
+get '/post/#{@user.id}/profile' do 
+	erb :profile
+end
+
+post '/post/profile' do 
+	@user = current_user
+
+end
+
 
 # #Client will be redirected towards a new post page
 # get '/post/:user_id.username/new' do
