@@ -26,7 +26,11 @@ post '/signup' do
 	params.inspect
 	@user = User.create(username: params[:username], password: params[:password], first: params[:first], last: params[:last],  email: params[:email])
 	session[:user_id] = @user.id
-	redirect '/'
+	if @user.save
+		redirect '/'
+	else
+		'/signup'
+	end
 end
 
 get '/signin' do
