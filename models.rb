@@ -1,9 +1,9 @@
 class User <ActiveRecord::Base
 	has_many :posts
-	has_many :follows, foreign_key: :follower_id
-	has_many :follows, through: :relationships, class_name: Relationship
-	has_many :followings, through: :relationships, class_name: Relationship
-	has_many :followings, foreign_key: :followee_id, class_name: Follow
+	has_many :relationships, foreign_key: :follower_id
+	has_many :relationships, through: :relationships
+	has_many :followings, through: :relationships
+	has_many :followings, foreign_key: :followee_id
 end
 
 class Post <ActiveRecord::Base
@@ -11,8 +11,8 @@ class Post <ActiveRecord::Base
 end
 
 class Relationship <ActiveRecord::Base
-	belongs_to :follower, foreign_key: :follower_id, class_name: User
-	belongs_to :followee, foreign_key: :followee_id, class_name: User
+	belongs_to :follower, foreign_key: :follower_id
+	belongs_to :followee, foreign_key: :followee_id
 end
 # 2 Convention over Configuration in Active Record
 
