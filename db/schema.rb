@@ -11,12 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105195820) do
+ActiveRecord::Schema.define(version: 20160106041701) do
 
   create_table "posts", force: :cascade do |t|
     t.text    "post",    limit: 140
     t.integer "user_id"
     t.string  "title"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followee_id"
   end
 
   create_table "users", force: :cascade do |t|
