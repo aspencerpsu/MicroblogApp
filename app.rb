@@ -39,34 +39,29 @@ get '/signin' do
 	erb :signin
 end
 
-get '/post' do 
+get '/post/:user_id' do 
 	@user = current_user
 	if @user
 		@posts = Post.where(user_id: @user.id)
-		erb :post
 	else
 		redirect '/'
 	end
+	erb :post
 end
-# post '/post/:user_id/new' do 
-# 	@current_user = current_user
-# 	if @current_user
-# 		puts @current_user.username
-# 		# @post = Post.create(user_id: "#{@current_user.id}, post: params[:userbody], params[:title]")
-# 	else
-# 		@cantsign = "Can't post your food for thought, try again buddy"
-# 	end
-# 	erb :post
-# end
-# get '/hello/:name' do
-#   # matches "GET /hello/foo" and "GET /hello/bar"
-#   # params['name'] is 'foo' or 'bar'
-# end
+
+get '/post/:user_id/new' do
+	@user = current_user
+	if @user
+		@posts = Post.where(user_id: @user.id)
+	end
+	erb :post
+end
 
 post '/post/:user_id/new' do 
-	@current_user = current_user
-	if @current_user.valid?
-		@post = Post.create(user_id: @current_user.id, post: params[:userbody])
+	@user = current_user
+	if @user.valid?
+		@posting = Post.create(user_id: @current_user.id, post: params[:userbody])
+		redirect '/post/:user_id/new'
 	else
 		@cantsign = "Can't post your food for thought, try again buddy"
 	end
@@ -83,7 +78,7 @@ post '/signin' do
     	# flash[:notice] = "You've been signed in successfully."
     	# current_user
     	puts 'params are for current_user ' + @user.id.inspect 
-    	redirect '/post'
+    	redirect '/post/:user_id'
 	else
 		redirect '/'
 	end
@@ -94,7 +89,7 @@ get '/logout' do
 	redirect '/'
 end
 
-get '/post/#{@user.id}/profile' do 
+get '/post/profile' do 
 	erb :profile
 end
 
