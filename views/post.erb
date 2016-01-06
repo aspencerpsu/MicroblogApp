@@ -7,3 +7,12 @@
 	<div id = "post.id"><%= post.title %></div>
 	<div id = "post.id"><%= post.post %></div>
 <% end %>
+
+<div class = "more post"><%=  @pcantsign %></div>	
+
+<form action = "/post/:user_id/new" method = "POST">
+	<div id = "no_show" name = "user_id"><% @posts[0].user_id %></div>
+	<input type = "text" name = "title">
+	<textarea type = "text" placeholder = "Tell us how your day was" name = "userbody"></textarea>
+	<input type = "submit">
+</form>
