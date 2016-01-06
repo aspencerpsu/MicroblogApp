@@ -4,15 +4,8 @@
 
  <h2>Tell us about yourself for today</h2>
  <!-- IF the current user has successfully wanted to post a comment then  -->
-<% if @current_user = true	%>
-	<% @post.each do |post| %>
-		<div id = "post.id"><%= @post.id %></div>
-		<div id = "post.id"><%= @post.title %></div>
-		<div id = "post.id"><%= @post.posts %></div>
-<% else %>
-	<div class = "more post"><%=  @pcantsign %></div>	
+<% @posts.each do |post| %>
+	<div id = "post.id"><%= post.id %></div>
+	<div id = "post.id"><%= post.title %></div>
+	<div id = "post.id"><%= post.post %></div>
 <% end %>
-<form action = "/post/:user_id/new" method = "POST">
-	<textarea type = "text" placeholder = "Tell us how your day was" name = "userbody"></textarea>
-	<input type = "submit">
-</form>

@@ -42,12 +42,12 @@ end
 get '/post' do 
 	@user = current_user
 	if @user
+		@posts = Post.where(user_id: @user.id)
 		erb :post
 	else
 		redirect '/'
 	end
 end
-
 # post '/post/:user_id/new' do 
 # 	@current_user = current_user
 # 	if @current_user
@@ -58,6 +58,20 @@ end
 # 	end
 # 	erb :post
 # end
+# get '/hello/:name' do
+#   # matches "GET /hello/foo" and "GET /hello/bar"
+#   # params['name'] is 'foo' or 'bar'
+# end
+
+post '/post/:user_id/new' do 
+	@current_user = current_user
+	if @current_user.valid?
+		@post = Post.create(user_id: @current_user.id, post: params[:userbody])
+	else
+		@cantsign = "Can't post your food for thought, try again buddy"
+	end
+	erb :post
+end
 
 
 post '/signin' do
