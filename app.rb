@@ -95,6 +95,7 @@ get '/logout' do
 end
 
 get '/post/#{@user.id}/profile' do 
+	@user = current_user
 	erb :profile
 end
 
