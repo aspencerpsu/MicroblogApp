@@ -48,7 +48,16 @@ get '/post' do
 		redirect '/'
 	end
 end
-
+# post '/post/:user_id/new' do 
+# 	@current_user = current_user
+# 	if @current_user
+# 		puts @current_user.username
+# 		# @post = Post.create(user_id: "#{@current_user.id}, post: params[:userbody], params[:title]")
+# 	else
+# 		@cantsign = "Can't post your food for thought, try again buddy"
+# 	end
+# 	erb :post
+# end
 # get '/hello/:name' do
 #   # matches "GET /hello/foo" and "GET /hello/bar"
 #   # params['name'] is 'foo' or 'bar'
@@ -84,6 +93,16 @@ get '/logout' do
 	session.clear
 	redirect '/'
 end
+
+get '/post/#{@user.id}/profile' do 
+	erb :profile
+end
+
+post '/post/profile' do 
+	@user = current_user
+
+end
+
 
 # #Client will be redirected towards a new post page
 # get '/post/:user_id.username/new' do
