@@ -39,10 +39,30 @@ get '/signin' do
 	erb :signin
 end
 
+post '/signin' do
+	# Select the first user in the Users table (i.e. row 1)
+	@user = User.where(username: params[:username]).first
+	# Check to see if the password is the same as the parameter of the user and the session cookie is empty
+	if @user.password == params[:password]
+		session[:user_id] = @user.id
+    	# flash[:notice] = "You've been signed in successfully."
+    	# current_user
+    	puts 'params are for current_user ' + @user.id.inspect 
+    	redirect '/post/:user_id'
+	else
+		redirect '/'
+	end
+end
+
+
 get '/post/:user_id' do 
 	@user = current_user
 	if @user
 		@posts = Post.where(user_id: @user.id)
+		@totalposts = Post.where(user_id: @user.id).all
+		# puts 'my params for the post are' + "#{@totalposts[0].user_id}"
+		erb :post
+
 	else
 		redirect '/'
 	end
@@ -59,15 +79,14 @@ end
 
 post '/post/:user_id/new' do 
 	@user = current_user
-	if @user.valid?
-		@posting = Post.create(user_id: @current_user.id, post: params[:userbody])
-		redirect '/post/:user_id/new'
+	if @user
+		@posts = Post.create(user_id: @current_user.id, post: params[:userbody], title: params[:title])
+		redirect '/post/:user_id'
 	else
 		@cantsign = "Can't post your food for thought, try again buddy"
 	end
 	erb :post
 end
-
 
 post '/signin' do
 	# Select the first user in the Users table (i.e. row 1)
