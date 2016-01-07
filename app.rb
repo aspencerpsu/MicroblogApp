@@ -94,14 +94,23 @@ get '/logout' do
 	redirect '/'
 end
 
-get '/post/#{@user.id}/profile' do 
+get '/post/profile' do 
 	@user = current_user
 	erb :profile
 end
 
 post '/post/profile' do 
 	@user = current_user
-
+	puts "my params are now " + params.inspect
+	@update = User.find_by(id: @user.id)
+	if params[:first] && params[:last] && params[:email] != ""
+		@update.update(first: params[:first], last: params[:last], email: params[:email])
+		@update.save
+	else
+		redirect '/post/profile'
+	end
+	puts @update
+	redirect '/post'
 end
 
 
