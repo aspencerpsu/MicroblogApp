@@ -1,8 +1,18 @@
 <!-- Edit Account Details  -->
 
 <h3><%=  @user.username  %></h3>
-<h3><%=  @user.firstname  %></h3>
-<h3><%=  @user.lastname  %></h3>
+<h3><%=  @user.first  %></h3>
+<h3><%=  @user.last  %></h3>
 <h3><%=  @user.email  %></h3> 
 
+
+<form action="/post/profile" method="POST">
+	<label for="first">First Name:</label>
+	<input type="text" name="first">
+	<label for="last">Last Name:</label>
+	<input type="text" name="last">
+	<label for="email">Email:</label>
+	<input type="text" name="email">
+	<input type="submit">
+</form>
 
