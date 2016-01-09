@@ -55,27 +55,26 @@ post '/signin' do
 	end
 end
 
-
-get '/post/:user_id' do 
+post '/post' do
 	@user = current_user
-	if @user
-		@posts = Post.where(user_id: @user.id)
-		@totalposts = Post.where(user_id: @user.id).all
-		# puts 'my params for the post are' + "#{@totalposts[0].user_id}"
-		erb :post
-
-	else
-		redirect '/'
-	end
-	erb :post
+	@posts = Post.create(post: params[:body], user_id: @user.id, title: params[:title])
+	redirect '/post'
 end
 
-get '/post/:user_id/new' do
+get '/feed' do 
+	@feeds = Post.all
+	erb :feed
+end
+
+get '/post/users' do 
 	@user = current_user
-	if @user
-		@posts = Post.where(user_id: @user.id)
+	if @user 
+		@all_users = User.all
+		@user_profile = @all_users.find(params[:id])
+		erb :users
+	else
+		redirect '/signin'
 	end
-	erb :post
 end
 
 post '/post/:user_id/new' do 
@@ -114,12 +113,13 @@ get '/logout' do
 	redirect '/'
 end
 
-get '/post/profile' do 
+
+get '/post/:id/profile' do 
 	@user = current_user
 	erb :profile
 end
 
-post '/post/profile' do 
+post '/post/:id/profile' do 
 	@user = current_user
 	puts "my params are now " + params.inspect
 	@update = User.find_by(id: @user.id)
@@ -132,15 +132,3 @@ post '/post/profile' do
 	puts @update
 	redirect '/post'
 end
-
-
-# #Client will be redirected towards a new post page
-# get '/post/:user_id.username/new' do
-
-# end
-
-# post '/post' do
-# 	current_user
-# 	@post = Post.create(: params[username], password: params[password])
-
-
