@@ -82,10 +82,10 @@ post '/post/:user_id/new' do
 	@user = current_user
 	if @user
 		@posts = Post.new(user_id: @current_user.id, post: params[:userbody], title: params[:title]);
-		if params[:userbody].val() <= 140
+		if params[:userbody].length <= 140
 			@posts.save
 			redirect '/post/:user_id'
-		elsif params[:userbody].val() > 140
+		elsif params[:userbody].length > 140
 			@characteroverload = "Characters cannot exceed 140"
 		end
 	else
@@ -115,10 +115,7 @@ get '/logout' do
 end
 
 get '/post/profile' do 
-<<<<<<< HEAD
-=======
 	@user = current_user
->>>>>>> 87edd8270c94265f920f854c74968a1a0f865cfc
 	erb :profile
 end
 
