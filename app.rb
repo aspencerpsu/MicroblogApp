@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 # require 'sinatra/flash'
 require './models.rb'
+require 'sinatra/param'
 
 use Rack::Session::Pool
 enable :sessions
@@ -39,11 +40,16 @@ get '/signin' do
 	erb :signin
 end
 
-get '/post' do 
-	@user = current_user
-	if @user
-		@posts = Post.where(user_id: @user.id)
-		erb :post
+post '/signin' do
+	# Select the first user in the Users table (i.e. row 1)
+	@user = User.where(username: params[:username]).first
+	# Check to see if the password is the same as the parameter of the user and the session cookie is empty
+	if @user.password == params[:password]
+		session[:user_id] = @user.id
+    	# flash[:notice] = "You've been signed in successfully."
+    	# current_user
+    	puts 'params are for current_user ' + @user.id.inspect 
+    	redirect '/post/:user_id'
 	else
 		redirect '/'
 	end
@@ -71,31 +77,21 @@ get '/post/users' do
 	end
 end
 
-# post '/post/:user_id/new' do 
-# 	@current_user = current_user
-# 	if @current_user
-# 		puts @current_user.username
-# 		# @post = Post.create(user_id: "#{@current_user.id}, post: params[:userbody], params[:title]")
-# 	else
-# 		@cantsign = "Can't post your food for thought, try again buddy"
-# 	end
-# 	erb :post
-# end
-# get '/hello/:name' do
-#   # matches "GET /hello/foo" and "GET /hello/bar"
-#   # params['name'] is 'foo' or 'bar'
-# end
-
-# post '/post/:user_id/new' do 
-# 	@current_user = current_user
-# 	if @current_user.valid?
-# 		@post = Post.create(user_id: @current_user.id, post: params[:userbody])
-# 	else
-# 		@cantsign = "Can't post your food for thought, try again buddy"
-# 	end
-# 	erb :post
-# end
-
+post '/post/:user_id/new' do 
+	@user = current_user
+	if @user
+		@posts = Post.new(user_id: @current_user.id, post: params[:userbody], title: params[:title]);
+		if params[:userbody].val() <= 140
+			@posts.save
+			redirect '/post/:user_id'
+		elsif params[:userbody].val() > 140
+			@characteroverload = "Characters cannot exceed 140"
+		end
+	else
+		@cantsign = "Can't post your food for thought, try again buddy"
+	end
+	erb :post
+end
 
 post '/signin' do
 	# Select the first user in the Users table (i.e. row 1)
@@ -106,7 +102,7 @@ post '/signin' do
     	# flash[:notice] = "You've been signed in successfully."
     	# current_user
     	puts 'params are for current_user ' + @user.id.inspect 
-    	redirect '/post'
+    	redirect '/post/:user_id'
 	else
 		redirect '/'
 	end
