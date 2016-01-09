@@ -8,6 +8,7 @@ end
 
 class Post <ActiveRecord::Base
 	belongs_to :user
+	validates :user_id, presence: true
 end
 
 class Relationship <ActiveRecord::Base
@@ -18,3 +19,4 @@ end
 
 #3 Database Table - Plural with underscores separating words (e.g., book_clubs).
 #4 Model Class - Singular with the first letter of each word capitalized (e.g., BookClub).
+
