@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 # require 'sinatra/flash'
 require './models.rb'
+require 'sinatra/param'
 
 use Rack::Session::Pool
 enable :sessions
@@ -80,8 +81,13 @@ end
 post '/post/:user_id/new' do 
 	@user = current_user
 	if @user
-		@posts = Post.create(user_id: @current_user.id, post: params[:userbody], title: params[:title])
-		redirect '/post/:user_id'
+		@posts = Post.new(user_id: @current_user.id, post: params[:userbody], title: params[:title]);
+		if params[:userbody].val() <= 140
+			@posts.save
+			redirect '/post/:user_id'
+		elsif params[:userbody].val() > 140
+			@characteroverload = "Characters cannot exceed 140"
+		end
 	else
 		@cantsign = "Can't post your food for thought, try again buddy"
 	end
