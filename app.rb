@@ -101,9 +101,7 @@ post '/post/:user_id' do
 			redirect '/post/:user_id'
 		elsif params[:userbody].length > 140
 			@characteroverload = "Characters cannot exceed 140"
-
 			@totalposts = Post.where(user_id: @user.id).all
-
 			erb :post
 		end
 	else
@@ -129,6 +127,7 @@ post '/post/:id/profile' do
 	if params[:first] && params[:last] && params[:email] != ""
 		@update.update(first: params[:first], last: params[:last], email: params[:email])
 		@update.save
+		add this
 	else
 		redirect '/post/profile'
 	end
