@@ -11,12 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106041701) do
+ActiveRecord::Schema.define(version: 20160110124649) do
 
   create_table "posts", force: :cascade do |t|
-    t.text    "post",    limit: 140
-    t.integer "user_id"
-    t.string  "title"
+    t.text     "post",       limit: 140
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "relationships", force: :cascade do |t|
