@@ -9,16 +9,17 @@
 	<% @totalposts.each do |post| %>
 		<div id = "post.id"><%= post.user_id %></div>
 		<div id = "post.id"><%= post.title %></div>
-		<div id = "post.id"><%= post.post[0,140] %></div>
+		<div id = "post.id"><%= post.created_at %></div>
+		<div id = "post.id"><%= post.post[0,139] %></div>
 	<% end %>
 <% else %>
 	<div id = "create a new post">Looks like you don't have a thread of posts, let's change that for you!</div>
 <% end %>
 
-<div class = "more post"><%=  @pcantsign %></div>
-<div class = "more post"><%= @characteroverload%></div>
+<div class = "more post" style = "color:red"><%=  @pcantsign %></div>
+<div class = "more post" style = "color:red"><%= @characteroverload%></div>
 
-<form action = "/post/:user_id/new" method = "POST">
+<form action = "/post/:user_id" method = "POST">
 	<% if @posts[0] != nil %>
 		<div id = "no_show" name = "user_id"><% @posts[0].user_id %></div>
 		<input type = "text" name = "title">
