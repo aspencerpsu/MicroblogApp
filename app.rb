@@ -139,7 +139,6 @@ post '/post/:id/profile' do
 	if params[:first] && params[:last] && params[:email] != ""
 		@update.update(first: params[:first], last: params[:last], email: params[:email])
 		@update.save
-		add this
 	else
 		redirect '/post/profile'
 	end
