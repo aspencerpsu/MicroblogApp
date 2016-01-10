@@ -2,7 +2,6 @@ require 'sinatra'
 require 'sinatra/activerecord'
 # require 'sinatra/flash'
 require './models.rb'
-require 'sinatra/param'
 
 use Rack::Session::Pool
 enable :sessions
@@ -66,6 +65,20 @@ get '/feed' do
 	erb :feed
 end
 
+get '/post/:user_id' do 
+	@user = current_user
+	if @user
+		@posts = Post.where(user_id: @user.id)
+		@totalposts = Post.where(user_id: @user.id).all
+		# puts 'my params for the post are' + "#{@totalposts[0].user_id}"
+		erb :post
+
+	else
+		redirect '/'
+	end
+	erb :post
+end
+
 get '/post/users' do 
 	@user = current_user
 	if @user 
@@ -77,20 +90,24 @@ get '/post/users' do
 	end
 end
 
-post '/post/:user_id/new' do 
+post '/post/:user_id' do 
 	@user = current_user
 	if @user
-		@posts = Post.new(user_id: @current_user.id, post: params[:userbody], title: params[:title]);
+		@posts = Post.new(user_id: @current_user.id, post: params[:userbody], title: params[:title])
+		puts "the body for the param is classified as: " + params[:userbody].length.inspect
+		puts "the official timestamp for the post is" + "#{@posts.created_at}"
 		if params[:userbody].length <= 140
 			@posts.save
+			puts "the official timestamp for the post is " + "#{@posts.created_at}"
 			redirect '/post/:user_id'
 		elsif params[:userbody].length > 140
 			@characteroverload = "Characters cannot exceed 140"
+			@totalposts = Post.where(user_id: @user.id).all
+			erb :post
 		end
 	else
 		@cantsign = "Can't post your food for thought, try again buddy"
 	end
-	erb :post
 end
 
 post '/signin' do
@@ -113,7 +130,7 @@ get '/logout' do
 	redirect '/'
 end
 
-
+     
 get '/post/:id/profile' do 
 	@user = current_user
 	erb :profile
