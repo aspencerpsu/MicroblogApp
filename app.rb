@@ -112,6 +112,10 @@ post '/post/:user_id' do
 		@cantsign = "Can't post your food for thought, try again buddy"
 	end
 end
+
+get '/about' do
+	erb :about
+end
 #####################################################
 
 # This is the user profile page that a user

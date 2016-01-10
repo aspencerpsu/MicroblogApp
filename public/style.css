@@ -60,4 +60,36 @@ html, body {
 
 .middle_nav li, h1, a, ul{
 	color: white;
+	text-decoration: none;
+	list-style-type: none;
+}
+
+.posts{
+	color: white;
+	font-size: 20px;
+}
+
+.backlinks li, a{
+	color: white;
+	text-decoration: none;
+	list-style-type: none;
+}
+ .aboutus{
+ 	position: relative;
+    top: 0;
+    left: 25%;
+    color: white;
+    width: 67%;
+    margin: 0% auto;
+    height: 100%;
+}
+
+ .aboutus h1, p{
+ 	color: white;
+ 	width: 200px;
+ 	height: 100%;
+ }
+.formbox{
+	width: 85%;
+	margin:	0 auto;
 }
