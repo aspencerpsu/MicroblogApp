@@ -72,10 +72,6 @@ get '/post/:user_id' do
 		@totalposts = Post.where(user_id: @user.id).all
 		# puts 'my params for the post are' + "#{@totalposts[0].user_id}"
 		erb :post
-<<<<<<< HEAD
-
-=======
->>>>>>> akeem1
 	else
 		redirect '/'
 	end
@@ -105,10 +101,9 @@ post '/post/:user_id' do
 			redirect '/post/:user_id'
 		elsif params[:userbody].length > 140
 			@characteroverload = "Characters cannot exceed 140"
-<<<<<<< HEAD
+
 			@totalposts = Post.where(user_id: @user.id).all
-=======
->>>>>>> akeem1
+
 			erb :post
 		end
 	else
