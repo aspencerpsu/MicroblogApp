@@ -1,7 +1,0 @@
-/*<!-- <div class = "more post"><%=  @pcantsign %></div>	 -->
-<!-- <form action = "/post/:user_id/new" method = "POST">
-	<div id = "no_show" name = "user_id"><% @post.user_id %></div>
-	<input type = "text" name = "title">
-	<textarea type = "text" placeholder = "Tell us how your day was" name = "userbody"></textarea>
-	<input type = "submit">
-</form> -->*/

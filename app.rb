@@ -72,7 +72,10 @@ get '/post/:user_id' do
 		@totalposts = Post.where(user_id: @user.id).all
 		# puts 'my params for the post are' + "#{@totalposts[0].user_id}"
 		erb :post
+<<<<<<< HEAD
 
+=======
+>>>>>>> akeem1
 	else
 		redirect '/'
 	end
@@ -102,26 +105,14 @@ post '/post/:user_id' do
 			redirect '/post/:user_id'
 		elsif params[:userbody].length > 140
 			@characteroverload = "Characters cannot exceed 140"
+<<<<<<< HEAD
 			@totalposts = Post.where(user_id: @user.id).all
+=======
+>>>>>>> akeem1
 			erb :post
 		end
 	else
 		@cantsign = "Can't post your food for thought, try again buddy"
-	end
-end
-
-post '/signin' do
-	# Select the first user in the Users table (i.e. row 1)
-	@user = User.where(username: params[:username]).first
-	# Check to see if the password is the same as the parameter of the user and the session cookie is empty
-	if @user.password == params[:password]
-		session[:user_id] = @user.id
-    	# flash[:notice] = "You've been signed in successfully."
-    	# current_user
-    	puts 'params are for current_user ' + @user.id.inspect 
-    	redirect '/post/:user_id'
-	else
-		redirect '/'
 	end
 end
 
