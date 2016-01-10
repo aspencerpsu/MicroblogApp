@@ -2,7 +2,6 @@ require 'sinatra'
 require 'sinatra/activerecord'
 # require 'sinatra/flash'
 require './models.rb'
-require 'sinatra/param'
 
 use Rack::Session::Pool
 enable :sessions
@@ -21,6 +20,9 @@ get '/' do
 	erb :index
 end
 
+
+# This /signup get and post route allows a new user to
+# signup and become a user of this microblog app
 get '/signup' do
 	erb :signup
 end
@@ -35,7 +37,11 @@ post '/signup' do
 		'/signup'
 	end
 end
+#######################################################
 
+# This post and get route gives an existing user the 
+# ability to sign in and also logout in the 
+# logout route
 get '/signin' do
 	erb :signin
 end
@@ -55,17 +61,25 @@ post '/signin' do
 	end
 end
 
-post '/post' do
-	@user = current_user
-	@posts = Post.create(post: params[:body], user_id: @user.id, title: params[:title])
-	redirect '/post'
+get '/logout' do
+	session.clear
+	redirect '/'
 end
 
+####################################################
+
+# This allows any user to the see the entire 
+# posts from every user
 get '/feed' do 
 	@feeds = Post.all
 	erb :feed
 end
+#####################################################
 
+# This is the main user page, a user will be able
+# to edit their profile, create posts, look at the
+# posts they have created, and see other users that
+# have signed up.
 get '/post/:user_id' do 
 	@user = current_user
 	if @user
@@ -79,18 +93,7 @@ get '/post/:user_id' do
 	erb :post
 end
 
-get '/post/users' do 
-	@user = current_user
-	if @user 
-		@all_users = User.all
-		@user_profile = @all_users.find(params[:id])
-		erb :users
-	else
-		redirect '/signin'
-	end
-end
-
-post '/post/:user_id/new' do 
+post '/post/:user_id' do 
 	@user = current_user
 	if @user
 		@posts = Post.new(user_id: @current_user.id, post: params[:userbody], title: params[:title]);
@@ -106,13 +109,12 @@ post '/post/:user_id/new' do
 	end
 	erb :post
 end
+#####################################################
 
-get '/logout' do
-	session.clear
-	redirect '/'
-end
-
-
+# This is the user profile page that a user
+# can see after signing in. A user should be 
+# able to edit profile information from this
+# get and post route in /post/:id/profile
 get '/post/:id/profile' do 
 	@user = current_user
 	erb :profile
@@ -129,5 +131,26 @@ post '/post/:id/profile' do
 		redirect '/post/profile'
 	end
 	puts @update
-	redirect '/post'
+	redirect '/post/:user_id'
+end
+########################################################
+
+# This user route will show all users that exist in
+# the microblog app, a user that has signed in should
+# be able to click on a user and see his posts and 
+# profile information
+
+get '/users' do
+	@user = current_user
+	if @user 
+		@all_users = User.all
+		erb :users
+	end
+end
+
+get '/users/profile/:id' do 
+	@user_person = params[:id]
+	puts "my param is " + @user_person
+	@user_find = User.find(@user_person)
+	erb :users_profile
 end

@@ -1,5 +1,6 @@
 <li><a href="/logout">Logout</a></li>
 <li><a href="/post/:id/profile">Edit Profile</a></li>
+<li><a href="/users">Users</a></li>
 
  <h2>Welcome <%= @user.username %></h2>
  <h2>Tell us about yourself for today</h2>
@@ -18,7 +19,7 @@
 <div class = "more post"><%=  @pcantsign %></div>
 <div class = "more post"><%= @characteroverload%></div>
 
-<form action = "/post/:user_id/new" method = "POST">
+<form action = "/post/:user_id" method = "POST">
 	<% if @posts[0] != nil %>
 		<div id = "no_show" name = "user_id"><% @posts[0].user_id %></div>
 		<input type = "text" name = "title">

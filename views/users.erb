@@ -1,4 +1,6 @@
 <h2>Users</h2>
 <% @all_users.each do |user| %>
-	<a href="/post/:id/profile"><li><%= user.first %> <%= user.last %></li></a>
+	<a href="/users/profile/<%= user.id %>">
+	<li><%= user.last %></li>
+	</a>
 <% end %>
