@@ -1,0 +1,62 @@
+*{
+	font-family: Cantarell, sans-serif;
+	font-size: 20px;
+	color: black;
+	font-style: normal;
+	font-weight: 900;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.jumbotron{
+	border-left: 8px solid black;
+    border-right: 8px solid black;
+    width: 100%;
+    max-width: 100%;
+    height: 600px;
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    border-bottom-style: outset;
+    outline-style: inset;
+    outline-color: gray;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    left: 0;
+}
+
+.jumbotron img{
+	position: relative;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.background{
+	position: absolute;
+    top: 61%;
+    background-color: black;
+    width: 100%;
+    left: 0;
+    color: white;
+}
+
+.middle_nav{
+	color: white;
+    max-height: 103%;
+    display: block;
+    width: 800px;
+    margin: 2% auto;
+    position: relative;
+    top: 40%;
+    vertical-align: middle;
+}
+
+.middle_nav li, h1, a{
+	color: white;
+}
