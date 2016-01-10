@@ -3,28 +3,31 @@
 	<li><a href="/post/:id/profile">Edit Profile</a></li>
 	<li><a href="/users">Users</a></li>
 </ul>
- <h2>Welcome <%= @user.username %></h2>
- <h2>Tell us about yourself for today</h2>
 
- <!-- IF the current user has successfully wanted to post a comment then  -->
-<% if @posts != nil %>
-	<% @totalposts.each do |post| %>
-		<div class = "posts"><%= post.user_id %></div>
-		<div class = "posts"><%= post.title %></div>
-		<div class = "posts"><%= post.created_at %></div>
-		<div class = "posts"><%= post.post[0,139] %></div>
+<div class = "posts">
+	<% if @posts != nil %>
+		<h2>Your storied history since ever since...</h2>
+		<% @totalposts.each do |post| %>
+			<div class = "posts"><%= post.user_id %></div>
+			<div class = "posts"><%= post.title %></div>
+			<div class = "posts"><%= post.created_at %></div>
+			<div class = "posts"><%= post.post[0,139] %></div>
+		<% end %>
+	<% else %>
+		<div id = "create a new post">Looks like you don't have a thread of posts, let's change that for you!</div>
 	<% end %>
-<% else %>
-	<div id = "create a new post">Looks like you don't have a thread of posts, let's change that for you!</div>
-<% end %>
+</div>
 
 <div class = "more post" style = "color:red; font:24px"><%=  @pcantsign %></div>
 <div class = "more post" style = "color:red; font:24px"><%= @characteroverload%></div>
 
+ <h2>Welcome <%= @user.username %></h2>
+ <h2>Tell us about yourself for today</h2>
 <form action = "/post/:user_id" method = "POST" class="formbox">
 	<% if @posts[0] != nil %>
 		<div id = "no_show" name = "user_id"><% @posts[0].user_id %></div>
-		<input type = "text" name = "title">
+		<label></label>
+		<input type = "text" placeholder = "What was the day like" name = "title">
 		<textarea type = "text" placeholder = "Tell us how your day was" name = "userbody"></textarea>
 		<input type = "submit">
 	<% else %>
