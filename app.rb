@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'sinatra/activerecord'
-# require 'sinatra/flash'
 require './models.rb'
 
 use Rack::Session::Pool
