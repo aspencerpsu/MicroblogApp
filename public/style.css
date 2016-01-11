@@ -1,7 +1,7 @@
-*, h3, h1, h2, p{
+/**, h3, h1, h2, p{
 	font-family: Cantarell, sans-serif;
 	font-size: 20px;
-	color: white;
+	color: black;
 	font-style: normal;
 	font-weight: 900;
 }
@@ -129,5 +129,6 @@ html, body {
 }
 
 .signin input{
-	color: white;
+	color: black;
 }
+*/

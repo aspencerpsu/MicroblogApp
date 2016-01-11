@@ -1,6 +1,4 @@
-<%  @feed_list = Array.new %>
 
-<% @latest_feed.each do |post| %>
-	<% @feed_list.push(post) %>
-
-<% end %>
+<%= @feeds.each do |post| %>
+	<%= post.post %>
+<%  end %>

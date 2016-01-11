@@ -70,11 +70,16 @@ end
 
 # This allows any user to the see the entire 
 # posts from every user
+# Was not able to finish this feed section, I tried
+# displaying all the feeds in the feed.erb but I kept
+# getting a noMethod error for @feeds > post.post. 
+# - DK
 get '/feed' do 
 	@feeds = Post.all
-	@latest_feed = @feeds.reverse
 	erb :feed
 end
+
+
 #####################################################
 
 # This is the main user page, a user will be able
