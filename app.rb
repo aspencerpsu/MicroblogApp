@@ -55,7 +55,7 @@ post '/signin' do
     	# flash[:notice] = "You've been signed in successfully."
     	# current_user
     	puts 'params are for current_user ' + @user.id.inspect 
-    	redirect '/post/:user_id'
+    	redirect '/post/:id'
 	else
 		redirect '/'
 	end
@@ -72,6 +72,7 @@ end
 # posts from every user
 get '/feed' do 
 	@feeds = Post.all
+	@latest_feed = @feeds.reverse
 	erb :feed
 end
 #####################################################
@@ -80,12 +81,11 @@ end
 # to edit their profile, create posts, look at the
 # posts they have created, and see other users that
 # have signed up.
-get '/post/:user_id' do 
+get '/post/:id' do 
 	@user = current_user
 	if @user
 		@posts = Post.where(user_id: @user.id)
 		@totalposts = Post.where(user_id: @user.id).all
-		# puts 'my params for the post are' + "#{@totalposts[0].user_id}"
 		erb :post
 	else
 		redirect '/'
@@ -93,15 +93,13 @@ get '/post/:user_id' do
 	erb :post
 end
 
-post '/post/:user_id' do 
+post '/post/:id' do 
 	@user = current_user
 	if @user
 		@posts = Post.new(user_id: @current_user.id, post: params[:userbody], title: params[:title])
 		puts "the body for the param is classified as: " + params[:userbody].length.inspect
-		puts "the official timestamp for the post is" + "#{@posts.created_at}"
 		if params[:userbody].length <= 140
 			@posts.save
-			puts "the official timestamp for the post is " + "#{@posts.created_at}"
 			redirect '/post/:user_id'
 		elsif params[:userbody].length > 140
 			@characteroverload = "Characters cannot exceed 140"
@@ -113,9 +111,23 @@ post '/post/:user_id' do
 	end
 end
 
+#####################################################
+# This is for a post deletion for a single post after
+# a user signs in
+
+get '/post/:id/delete_post' do 
+	@single_post = params[:id]
+	@find_single_post = Post.find(@single_post)
+	@find_single_post.destroy
+	redirect '/post/:id'
+end
+####################################################
+
+# This is for the about page
 get '/about' do
 	erb :about
 end
+>>>>>>> master
 #####################################################
 
 # This is the user profile page that a user
@@ -147,6 +159,17 @@ post '/post/:id/profile' do
 end
 ########################################################
 
+# This route will delete a user from the database and
+# all of the users posts that is associated with him.
+get '/post/:id/profile/delete' do 
+	@user_delete = User.find(params[:id])
+	@user_post_delete = Post.find_by(user_id: params[:id])
+	@user_delete.destroy
+	@user_post_delete.destroy
+	redirect '/'
+end
+########################################################
+
 # This user route will show all users that exist in
 # the microblog app, a user that has signed in should
 # be able to click on a user and see his posts and 
@@ -166,3 +189,7 @@ get '/users/profile/:id' do
 	@user_find = User.find(@user_person)
 	erb :users_profile
 end
+
+
+
+
