@@ -6,7 +6,7 @@
 	<h3><%=  @user.email  %></h3> 
 </div>
 
-<form action="/post/:id/profile" method="POST" class = "edits">
+<form action="/post/<%= @user.id %>/profile" method="POST" class = "edits">
 	<label for="first" class = "changename">First Name:</label>
 	<input type="text" name="first" placeholder = "change your first name">
 	<label for="last">Last Name:</label>
@@ -16,3 +16,4 @@
 	<input type="submit" name = "Change">
 </form>
 
+<a href="/post/<%= @user.id %>/profile/delete" name="_method" value="delete">Delete My Account</a>

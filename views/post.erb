@@ -2,6 +2,7 @@
 	<li><a href="/logout">Logout</a></li>
 	<li><a href="/post/:id/profile">Edit Profile</a></li>
 	<li><a href="/users">Users</a></li>
+	<li><a href="/feed">Posts Feed</a></li>
 </ul>
 
 <div class = "posts">
@@ -11,7 +12,8 @@
 			<div class = "posts"><%= post.user_id %></div>
 			<div class = "posts"><%= post.title %></div>
 			<div class = "posts"><%= post.created_at %></div>
-			<div class = "posts"><%= post.post[0,139] %></div>
+			<div id = "post.id"><%= post.post %></div>
+		<a href="/post/<%= post.id %>/delete_post">Delete Post</a>
 		<% end %>
 	<% else %>
 		<div id = "create a new post">Looks like you don't have a thread of posts, let's change that for you!</div>
