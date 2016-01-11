@@ -7,8 +7,10 @@
 
 <div class = "posts">
 	<% if @posts != nil %>
-		<h2>Your storied history since ever since...</h2>
+		<h2><%= "Your storied history ever since..." %></h2>
 		<% @totalposts.each do |post| %>
+			<br>
+			<br>
 			<div class = "posts"><%= post.user_id %></div>
 			<div class = "posts"><%= post.title %></div>
 			<div id = "post.id"><%= post.post %></div>
@@ -18,22 +20,26 @@
 		<div id = "create a new post">Looks like you don't have a thread of posts, let's change that for you!</div>
 	<% end %>
 </div>
-
+<br>
+<br>
+<br>
 <div class = "more post" style = "color:red; font:24px"><%=  @pcantsign %></div>
 <div class = "more post" style = "color:red; font:24px"><%= @characteroverload%></div>
 
- <h2>Welcome <%= @user.username %></h2>
+ <h2>Welcome <%= @user.username %>!</h2>
  <h2>Tell us about yourself for today</h2>
 <form action = "/post/:user_id" method = "POST" class="formbox">
 	<% if @posts[0] != nil %>
 		<div id = "no_show" name = "user_id"><% @posts[0].user_id %></div>
 		<label></label>
-		<input type = "text" placeholder = "What was the day like" name = "title">
+		<input type = "text" placeholder = "What was the day like?" name = "title">
 		<textarea type = "text" placeholder = "Tell us how your day was" name = "userbody"></textarea>
 		<input type = "submit">
 	<% else %>
-		<div id = "headline">Create A Brand New Post <%= @user.username %>!</div>
-		<input type = "text" name = "title">
+		<div id = "headline">Create a brand new post <%= @user.username %>!</div>
+		<br>
+		<input type = "text" name = "title" placeholder = "What was the day like?">
+		<br>
 		<textarea type = "text" placeholder = "Tell us how your day was" name = "userbody"></textarea>
 		<input type = "submit">
 	<% end %>
