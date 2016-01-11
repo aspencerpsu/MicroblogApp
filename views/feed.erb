@@ -1,3 +1,6 @@
-<%  @feeds.each do |feed| %>
-	<li><%= feed.post%></li>
+<%  @feed_list = Array.new %>
+
+<% @latest_feed.each do |post| %>
+	<% @feed_list.push(post) %>
+
 <% end %>
