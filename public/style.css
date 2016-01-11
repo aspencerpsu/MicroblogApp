@@ -16,7 +16,7 @@ html, body {
     border-right: 8px solid black;
     width: 100%;
     max-width: 100%;
-    height: 600px;
+    height: 400px;
     position: absolute;
     top: 0;
     z-index: 999;
@@ -38,9 +38,9 @@ html, body {
 	opacity: 1;
 }
 
-.background{
-	position: absolute;
-    top: 61%;
+.background {
+    position: absolute;
+    top: 57%;
     background-color: black;
     width: 100%;
     left: 0;
@@ -50,12 +50,9 @@ html, body {
 .middle_nav{
 	color: white;
     max-height: 103%;
-    display: block;
     width: 800px;
-    margin: 2% auto;
-    position: relative;
-    top: 40%;
-    left: -29%;
+    margin: 2% auto 2%;
+    display: inline-block;
     vertical-align: middle;
 }
 
@@ -80,6 +77,9 @@ html, body {
 	color: white;
 }
 
+.formbox input {
+    display: inherit;
+}
 .backlinks li, a{
 	color: white;
 	text-decoration: none;
@@ -100,9 +100,18 @@ html, body {
  	width: 200px;
  	height: 100%;
  }
+
 .formbox{
 	width: 85%;
 	margin:	0 auto;
+}
+
+.formbox input{
+	color: black;
+}
+
+.formbox textarea{
+	color: black;
 }
 
 .userinfo{
@@ -110,17 +119,18 @@ html, body {
 }
 
 .edits{
-	width: 800px;
-	margin: 0 auto;
-	display: block;
+	width: 200px;
+    margin: 10px auto;
+    display: block;
+    line-height: 1.8em;
 }
 
 .edits label{
 	color: white;
 }
 
-.edits label{
-	color: block;
+.edits input{
+	color: black;
 	font-style: bold;
 }
 
@@ -129,5 +139,18 @@ html, body {
 }
 
 .signin input{
-	color: white;
+	color: black;
+}
+
+.signup input{
+	color: black;
+}
+
+.userinfo{
+	position: relative;
+    top: 0;
+    left: -15%;
+    width: 300px;
+    height: 200px;
+    margin: -20px auto;
 }
