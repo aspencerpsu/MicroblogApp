@@ -127,7 +127,6 @@ end
 get '/about' do
 	erb :about
 end
->>>>>>> master
 #####################################################
 
 # This is the user profile page that a user
