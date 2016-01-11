@@ -121,7 +121,13 @@ get '/post/:id/delete_post' do
 	@find_single_post.destroy
 	redirect '/post/:id'
 end
+####################################################
 
+# This is for the about page
+get '/about' do
+	erb :about
+end
+>>>>>>> master
 #####################################################
 
 # This is the user profile page that a user
@@ -145,7 +151,6 @@ post '/post/:id/profile' do
 	if params[:first] && params[:last] && params[:email] != ""
 		@update.update(first: params[:first], last: params[:last], email: params[:email])
 		@update.save
-		add this
 	else
 		redirect '/post/profile'
 	end

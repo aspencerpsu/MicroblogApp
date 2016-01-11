@@ -1,7 +1,7 @@
-*{
+*, h3, h1, h2, p{
 	font-family: Cantarell, sans-serif;
 	font-size: 20px;
-	color: black;
+	color: white;
 	font-style: normal;
 	font-weight: 900;
 }
@@ -35,6 +35,7 @@ html, body {
 	left: 0;
 	height: 100%;
 	width: 100%;
+	opacity: 1;
 }
 
 .background{
@@ -54,9 +55,79 @@ html, body {
     margin: 2% auto;
     position: relative;
     top: 40%;
+    left: -29%;
     vertical-align: middle;
 }
 
-.middle_nav li, h1, a{
+.middle_nav li, h1, a, ul{
+	color: white;
+	text-decoration: none;
+	list-style-type: none;
+}
+
+.poster h2{
+	color: white;
+}
+
+.posts{
+	color: white;
+	font-size: 20px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.posts h2{
+	color: white;
+}
+
+.backlinks li, a{
+	color: white;
+	text-decoration: none;
+	list-style-type: none;
+}
+ .aboutus{
+ 	position: relative;
+    top: 0;
+    left: 25%;
+    color: white;
+    width: 67%;
+    margin: 0% auto;
+    height: 100%;
+}
+
+ .aboutus h1, p{
+ 	color: white;
+ 	width: 200px;
+ 	height: 100%;
+ }
+.formbox{
+	width: 85%;
+	margin:	0 auto;
+}
+
+.userinfo{
+	color: white;
+}
+
+.edits{
+	width: 800px;
+	margin: 0 auto;
+	display: block;
+}
+
+.edits label{
+	color: white;
+}
+
+.edits label{
+	color: block;
+	font-style: bold;
+}
+
+.signin label{
+	color: white;
+}
+
+.signin input{
 	color: white;
 }
